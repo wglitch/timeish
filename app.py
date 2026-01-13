@@ -1,10 +1,13 @@
+import os
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html")  # Din clock HTML
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Dynamisk port: Render sätter PORT, annars fallback till 5000 lokalt
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
